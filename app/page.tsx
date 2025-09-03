@@ -12,7 +12,7 @@ import AboutSection from "@/components/about-section"
 import AIAlgorithmSection from "@/components/ai-algorithm-section"
 import AffoHealthcarePage2Section from "@/components/affo-healthcare-page2-section"
 import AffoHealthcarePage3Section from "@/components/affo-healthcare-page3-section"
-import PersonalizedLifestyleSection from "@/components/personalized-lifestyle-section"
+import PersonalizedLifestyleSection from "@/components/personalized-lifestyle-section-new"
 import ContactSection from "@/components/contact-section"
 import Navigation from "@/components/navigation"
 import ParticleField from "@/components/particle-field"
@@ -30,24 +30,33 @@ export default function Home() {
     if (!showMainContent) return
 
     const ctx = gsap.context(() => {
+      // Check if it's mobile (max-width: 768px)
+      const isMobile = window.innerWidth <= 768
+      
       gsap.utils.toArray(".fade-in-section").forEach((section: any, index) => {
-        gsap.fromTo(
-          section,
-          { opacity: 0, y: 50, scale: 0.98 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 95%",
-              end: "bottom 10%",
-              toggleActions: "play none none reverse",
+        if (!isMobile) {
+          // Desktop: Apply slide-up animations
+          gsap.fromTo(
+            section,
+            { opacity: 0, y: 50, scale: 0.98 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 95%",
+                end: "bottom 10%",
+                toggleActions: "play none none reverse",
+              },
             },
-          },
-        )
+          )
+        } else {
+          // Mobile: Make sections immediately visible without animation
+          gsap.set(section, { opacity: 1, y: 0, scale: 1 })
+        }
       })
 
       gsap.utils.toArray(".parallax-element").forEach((element: any) => {

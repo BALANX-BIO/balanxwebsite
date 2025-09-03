@@ -107,19 +107,19 @@ export default function PersonalizedLifestyleSection() {
         style={{ backgroundColor: "rgba(0,0,0,0.3)" }}
       ></div>
 
-      {/* Content */}
-      <div className="relative z-20 w-full h-full flex items-center justify-center px-4 md:px-6 personalize-content-mobile personalize-content-adjusted">
+      {/* Content - Moved up for better visibility */}
+      <div className="relative z-20 w-full h-full flex items-center justify-center px-4 md:px-6" style={{ transform: 'translateY(-10%)' }}>
         <div 
           ref={textRef}
           className="flex flex-col items-center max-w-[1200px] mx-auto w-full"
         >
           {/* Title - Now on top */}
           <div className="text-center mb-8">
-            <h2 
+                          <h2 
               className="text-2xl md:text-4xl lg:text-5xl font-semibold text-white drop-shadow-lg leading-tight"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: "yellow" }}
             >
-              Personalize Your Lifestyle
+              Personalize Your Lifestyle - UPDATED
             </h2>
           </div>
 
@@ -155,8 +155,8 @@ export default function PersonalizedLifestyleSection() {
         </div>
       </div>
 
-      {/* Join the Waitlist Button - Moved up by 20% */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 z-30 personalize-button-mobile personalize-button-adjusted">
+      {/* Join the Waitlist Button - Positioned at the bottom of the content */}
+      <div className="absolute bottom-[15%] left-1/2 transform -translate-x-1/2 z-30">
         <Link
           href="/pre-order"
           className="inline-flex items-center px-6 py-2 md:px-8 md:py-3 bg-white/90 text-black font-medium rounded-full hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 backdrop-blur-sm text-sm md:text-lg"
@@ -169,11 +169,6 @@ export default function PersonalizedLifestyleSection() {
       {/* Mobile-specific styling for better spacing and positioning */}
       <style jsx>{`
         @media (max-width: 768px) {
-          /* Move all content up by another 5% */
-          .personalize-content-adjusted {
-            transform: translateY(10vh) !important;
-          }
-          
           /* Better spacing between points */
           .personalize-points-spacing {
             margin-bottom: 2rem !important;
@@ -184,10 +179,9 @@ export default function PersonalizedLifestyleSection() {
             margin-bottom: 1.5rem !important;
           }
           
-          /* Position button - moved up with content */
-          .personalize-button-adjusted {
-            bottom: 30vh !important;
-            margin-top: 1rem !important;
+          /* Position button for mobile */
+          .bottom-\[15\%\] {
+            bottom: 20% !important;
           }
         }
       `}</style>

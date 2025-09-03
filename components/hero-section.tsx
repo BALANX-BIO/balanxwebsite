@@ -106,12 +106,12 @@ export default function HeroSection() {
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ maxWidth: '100%', height: 'auto' }}
       >
-        <source src="/video/0_Pink_Lake_Salt_Lake_3840x2160.mp4" type="video/mp4" />
+        <source src="/video/0_Pink_Lake_Salt_Lake_3840x2160_8sec.mp4" type="video/mp4" />
       </video>
 
       {/* Content - Centered to video background */}
       <div className="absolute inset-0 z-20 flex items-center justify-center">
-        <div className="text-center px-4 hero-text-positioning">
+        <div className="text-center px-4 transform translate-y-0 md:translate-y-0 max-md:-translate-y-[230%]">
           <div 
             ref={titleRef}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-widest drop-shadow-2xl mb-1 md:mb-6"
@@ -124,7 +124,7 @@ export default function HeroSection() {
               filter: "drop-shadow(0 0 30px rgba(255,255,255,0.4))"
             }}
           >
-            BALANX-BIO
+BALANX-BIO
           </div>
           <div 
             ref={subtitleRef}
@@ -166,14 +166,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Mobile-specific styling */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .hero-text-positioning {
-            transform: translateY(-20vh) !important;
-          }
-        }
-      `}</style>
+
     </section>
   )
 }

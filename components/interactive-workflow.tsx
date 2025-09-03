@@ -74,10 +74,9 @@ export default function InteractiveWorkflow() {
     <section
       ref={sectionRef}
       data-section="interactive-workflow"
-      className="relative min-h-[600vh] flex flex-col items-center justify-start py-12 overflow-hidden timeline-section-mobile"
+      className="relative min-h-[600vh] flex flex-col items-center justify-start py-12 overflow-hidden timeline-section-mobile -mt-[59vh]"
       style={{
         background: "linear-gradient(to bottom, #d4c1a7 0%, #e8dccd 50%, #f8f5f0 100%)",
-        marginTop: 0,
         marginBottom: 0
       }}
     >
@@ -160,14 +159,7 @@ export default function InteractiveWorkflow() {
       <div style={{ height: `${workflowSteps.length * 50}vh` }} className="hidden md:block w-full"></div>
       <div style={{ height: `${workflowSteps.length * 35}vh` }} className="md:hidden w-full spacer-mobile"></div>
 
-      {/* Mobile-specific styling */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          section.timeline-section-mobile {
-            margin-top: -45vh !important;
-          }
-        }
-      `}</style>
+
     </section>
   )
 }

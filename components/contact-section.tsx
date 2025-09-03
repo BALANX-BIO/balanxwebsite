@@ -13,79 +13,52 @@ export default function ContactSection() {
   const [isPartnershipPopupOpen, setIsPartnershipPopupOpen] = useState(false)
 
   useEffect(() => {
+    // Check if it's mobile (max-width: 768px)
+    const isMobile = window.innerWidth <= 768
+
     const ctx = gsap.context(() => {
-      // Elegant section reveal
-      gsap.fromTo(
-        sectionRef.current,
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      )
+      // Remove section reveal animation - section is always visible
+      // Remove staggered content animation - content is always visible
 
-      // Staggered content animation
-      gsap.fromTo(
-        ".contact-element",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      )
+      // Form input focus effects (desktop only)
+      if (!isMobile) {
+        gsap.utils.toArray(".form-input").forEach((input: any) => {
+          input.addEventListener("focus", () => {
+            gsap.to(input, {
+              scale: 1.02,
+              borderColor: "#22c55e",
+              duration: 0.3,
+              ease: "power2.out",
+            })
+          })
+          input.addEventListener("blur", () => {
+            gsap.to(input, {
+              scale: 1,
+              borderColor: "#4b5563",
+              duration: 0.3,
+              ease: "power2.out",
+            })
+          })
+        })
 
-      // Form input focus effects
-      gsap.utils.toArray(".form-input").forEach((input: any) => {
-        input.addEventListener("focus", () => {
-          gsap.to(input, {
-            scale: 1.02,
-            borderColor: "#22c55e",
-            duration: 0.3,
-            ease: "power2.out",
+        // Button hover animation (desktop only)
+        const reserveButton = document.querySelector(".reserve-button")
+        if (reserveButton) {
+          reserveButton.addEventListener("mouseenter", () => {
+            gsap.to(reserveButton, {
+              scale: 1.05,
+              duration: 0.3,
+              ease: "power2.out",
+            })
           })
-        })
-        input.addEventListener("blur", () => {
-          gsap.to(input, {
-            scale: 1,
-            borderColor: "#4b5563",
-            duration: 0.3,
-            ease: "power2.out",
+          reserveButton.addEventListener("mouseleave", () => {
+            gsap.to(reserveButton, {
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.out",
+            })
           })
-        })
-      })
-
-      // Button hover animation
-      const reserveButton = document.querySelector(".reserve-button")
-      if (reserveButton) {
-        reserveButton.addEventListener("mouseenter", () => {
-          gsap.to(reserveButton, {
-            scale: 1.05,
-            duration: 0.3,
-            ease: "power2.out",
-          })
-        })
-        reserveButton.addEventListener("mouseleave", () => {
-          gsap.to(reserveButton, {
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          })
-        })
+        }
       }
     }, sectionRef)
 
@@ -93,12 +66,11 @@ export default function ContactSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} data-section="contact" className="relative text-gray-900 overflow-hidden contact-section-mobile contact-section-adjusted" style={{
-      background: "radial-gradient(ellipse at 60% 50%, #b78062 0%, #b78062 40%, #a66c4e 100%)",
-      marginTop: 0
+    <section ref={sectionRef} data-section="contact" className="relative text-gray-900 overflow-hidden contact-section-mobile contact-section-adjusted -mt-[19.3vh] max-md:-mt-[32.3vh]" style={{
+      background: "radial-gradient(ellipse at 60% 50%, #b78062 0%, #b78062 40%, #a66c4e 100%)"
     }}>
       {/* Main Contact Section */}
-      <div className="relative z-10 py-32 px-6 min-h-screen flex items-center">
+      <div className="relative z-10 py-16 px-6 min-h-[70vh] flex items-center">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Text Content */}
@@ -128,16 +100,16 @@ export default function ContactSection() {
             {/* Right Side - Form and Disclaimer */}
             <div className="text-center lg:text-left">
               {/* Email Form */}
-              <form ref={formRef} className="contact-element flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+              <form ref={formRef} className="contact-element flex flex-col gap-4 justify-center lg:justify-start mb-8">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="form-input flex-1 max-w-md bg-white border border-orange-200 rounded-full py-4 px-6 text-gray-900 placeholder-gray-500 focus:border-orange-400 focus:outline-none transition-all duration-300 shadow-lg"
+                  className="form-input w-full max-w-md bg-white border border-orange-200 rounded-full py-4 px-6 text-gray-900 placeholder-gray-500 focus:border-orange-400 focus:outline-none transition-all duration-300 shadow-lg"
                   style={{ fontFamily: "var(--font-agrandir-wide), Poppins, sans-serif" }}
                 />
                 <button
                   type="submit"
-                  className="reserve-button bg-white text-amber-800 font-extralight py-4 px-8 rounded-full hover:bg-amber-50 transition-all duration-300 flex items-center justify-center gap-2 min-w-fit shadow-lg"
+                  className="reserve-button w-full max-w-md bg-white text-amber-800 font-extralight py-3 px-6 rounded-full hover:bg-amber-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-sm"
                   style={{ fontFamily: "var(--font-agrandir-wide), Poppins, sans-serif" }}
                 >
                   Reserve Now
@@ -154,7 +126,7 @@ export default function ContactSection() {
       </div>
 
       {/* Footer Section */}
-      <div className="py-16 px-6">
+      <div className="py-8 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* Brand Section */}
@@ -176,7 +148,7 @@ export default function ContactSection() {
                 Where ancient wisdom meets modern wellness.
               </p>
 
-                            {/* Social Media Icons */}
+                                                        {/* Social Media Icons */}
               <div className="flex gap-4">
                 <a
                   href="https://www.instagram.com/balanx_bio25/?igsh=eWxpZnFqMGIzNmFl#"
@@ -199,6 +171,36 @@ export default function ContactSection() {
                   </svg>
                 </a>
                 <a
+                  href="https://x.com/balanxbio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center hover:bg-orange-300 transition-colors duration-300 text-orange-700"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.youtube.com/@balanxbio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center hover:bg-orange-300 transition-colors duration-300 text-orange-700"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.tiktok.com/@balanxbio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-orange-200 rounded-full flex items-center justify-center hover:bg-orange-300 transition-colors duration-300 text-orange-700"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                  </svg>
+                </a>
+                <a
                   href="https://www.xiaohongshu.com/user/profile/68141048000000000e01d28f?xsec_token=YBbZwnRatk2i5TYUseLHheh2t31HL_-j8y0ZaTvIzDWXM=&xsec_source=app_share&xhsshare=CopyLink&appuid=6219258000000000100094bd&apptime=1753755554&share_id=f2ce3a51d175488b95b886331eee176e"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -209,7 +211,7 @@ export default function ContactSection() {
                     <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
                   </svg>
                 </a>
- 
+
                 </div>
                 
                 {/* Copyright */}
@@ -292,14 +294,7 @@ export default function ContactSection() {
         onClose={() => setIsPartnershipPopupOpen(false)} 
       />
 
-      {/* Mobile-specific styling to move section up by 8.5% */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          section.contact-section-adjusted {
-            margin-top: -25.5vh !important;
-          }
-        }
-      `}</style>
+
     </section>
   )
 }

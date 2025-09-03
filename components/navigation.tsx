@@ -4,11 +4,14 @@ import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function Navigation() {
   const navRef = useRef<HTMLElement>(null)
   const router = useRouter()
   const pathname = usePathname()
+  const isMobile = useIsMobile()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     // Elegant navigation entrance
@@ -38,6 +41,11 @@ export default function Navigation() {
       window.removeEventListener('scroll', onScroll)
     }
   }, [])
+  
+  // Close mobile menu on pathname change
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
 
   // Handle navigation clicks
   const handleNavigationClick = (sectionId: string) => {
@@ -68,6 +76,12 @@ export default function Navigation() {
         router.push(`/#${sectionId}`)
       }
     }
+  }
+
+  // Close mobile menu when navigating
+  const handleMobileNavigation = (sectionId: string) => {
+    handleNavigationClick(sectionId)
+    setMobileMenuOpen(false)
   }
 
   return (
@@ -146,12 +160,74 @@ export default function Navigation() {
         </Link>
 
         {/* Mobile menu button */}
-        <button className="md:hidden text-white hover:text-light-green-400 transition-colors duration-300">
-          <div className="w-8 h-px bg-current mb-2 transition-all duration-300"></div>
-          <div className="w-8 h-px bg-current mb-2 transition-all duration-300"></div>
-          <div className="w-8 h-px bg-current transition-all duration-300"></div>
+        <button 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden text-white hover:text-light-green-400 transition-colors duration-300 mr-8"
+        >
+          <div className={`w-8 h-px bg-current mb-2 transition-all duration-300 ${mobileMenuOpen ? 'transform rotate-45 translate-y-2.5' : ''}`}></div>
+          <div className={`w-8 h-px bg-current mb-2 transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></div>
+          <div className={`w-8 h-px bg-current transition-all duration-300 ${mobileMenuOpen ? 'transform -rotate-45 -translate-y-2.5' : ''}`}></div>
         </button>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center md:hidden">
+          <div className="flex flex-col items-center space-y-6 w-full px-8">
+            <button
+              onClick={() => handleMobileNavigation('hero')}
+              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+            >
+              Home
+            </button>
+            <button
+              onClick={() => handleMobileNavigation('interactive-workflow')}
+              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+            >
+              About
+            </button>
+            <button
+              onClick={() => handleMobileNavigation('algorithm')}
+              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+            >
+              Our Algorithm
+            </button>
+            <button
+              onClick={() => handleMobileNavigation('affo-healthcare-page2')}
+              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+            >
+              Affo Healthcare
+            </button>
+            <button
+              onClick={() => handleMobileNavigation('affo-healthcare-page3')}
+              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+            >
+              Services
+            </button>
+            <button
+              onClick={() => handleMobileNavigation('contact')}
+              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+            >
+              Contact
+            </button>
+            
+            <Link
+              href="/pre-order"
+              className="mt-8 inline-flex items-center px-6 py-3 bg-black/80 text-white font-extralight rounded-full hover:bg-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 backdrop-blur-sm"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Join the Waitlist
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   )
 }

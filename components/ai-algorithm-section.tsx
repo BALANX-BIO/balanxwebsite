@@ -955,7 +955,7 @@ function CoffeeConfiguration() {
           <p className="text-xl text-amber-900 max-w-3xl mx-auto drop-shadow-md mb-4 ml-auto px-1 py-1 rounded-lg border-transparent bg-transparent opacity-100 font-light" style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}>
             AI-selected nutrients and flavors to restore balance to your busy lives
           </p>
-          <div className="text-lg text-white font-extralight px-4 py-3 rounded-lg my-0 mx-28 bg-slate-700/90 backdrop-blur-sm border border-slate-600/50" style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}>
+          <div className="text-lg text-white font-extralight px-4 py-3 rounded-lg my-0 mx-28 md:mx-28 max-md:mx-8 bg-slate-700/90 backdrop-blur-sm border border-slate-600/50" style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}>
             Based on your microbiome analysis, the AI has selected the optimal flavor and nutrient combination from the<br />{" "}
             <span className="text-white font-extralight" style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}>Calm & Focus Mind & Body Balance Series</span>
           </div>

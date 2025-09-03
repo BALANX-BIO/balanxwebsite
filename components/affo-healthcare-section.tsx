@@ -84,14 +84,14 @@ export default function AffoHealthcareSection() {
         >
           ÁFFO HEALTHCARE
         </h2>
-        <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-white/30 max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto mb-12 sm:mb-16 shadow-lg">
-          <p className="text-lg sm:text-xl md:text-2xl text-white/90 drop-shadow-md">
+        <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-white/30 max-w-full sm:max-w-2xl lg:max-w-3xl mx-auto mb-8 sm:mb-16 shadow-lg">
+          <p className="text-base sm:text-xl md:text-2xl text-white/90 drop-shadow-md">
             Experience personalized wellness through advanced <span className="whitespace-nowrap">bio-analysis</span> and tailored nutrition.
           </p>
         </div>
         
         {/* Embedded video */}
-        <div className="w-full max-w-full sm:max-w-3xl lg:max-w-4xl mx-auto mb-12 sm:mb-16 rounded-xl overflow-hidden shadow-2xl">
+        <div className="w-full max-w-full sm:max-w-3xl lg:max-w-4xl mx-auto mb-8 sm:mb-16 rounded-xl overflow-hidden shadow-2xl">
           <video
             className="w-full h-auto object-cover"
             style={{ maxWidth: '100%', height: 'auto' }}
@@ -113,7 +113,9 @@ export default function AffoHealthcareSection() {
       <style jsx>{`
         @media (max-width: 768px) {
           section.affo-healthcare-mobile {
-            margin-top: -200vh !important;
+            margin-top: -150vh !important;
+            padding-top: 4rem !important;
+            padding-bottom: 4rem !important;
           }
         }
       `}</style>

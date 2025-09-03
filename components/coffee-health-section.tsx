@@ -182,41 +182,41 @@ const CoffeeHealthSection = forwardRef<HTMLDivElement, CoffeeHealthSectionProps>
       </video>
       {/* Dark overlay for better text readability within this section */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px] z-10" />
-      <div className="relative z-20 max-w-7xl mx-auto px-6 py-24 text-white">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-24 text-white">
         <div className="text-center">
           <h2
             ref={titleRef}
-            className="text-6xl md:text-8xl font-semibold mb-8 tracking-wide drop-shadow-lg"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold mb-6 sm:mb-8 tracking-wide drop-shadow-lg"
             style={{ fontFamily: "var(--font-agrandir-wide), Poppins, sans-serif" }}
           >
             Coffee & Wellness
           </h2>
           <p
             ref={descriptionRef}
-            className="text-xl md:text-2xl leading-relaxed max-w-5xl mx-auto mb-16 drop-shadow-md font-light"
+            className="text-lg sm:text-xl md:text-2xl leading-relaxed max-w-5xl mx-auto mb-10 sm:mb-16 drop-shadow-md font-light"
             style={{ fontFamily: "var(--font-agrandir-wide), Poppins, sans-serif" }}
           >
             Discover how our unique coffee blends, infused with ancient wisdom and modern science, can elevate your daily wellness routine.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
             {coffeeBenefits.map((item, index) => (
               <div
                 key={index}
                 ref={(el) => (cardsRef.current[index] = el)}
-                className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-8 flex flex-col items-center text-center border border-white/20 hover:shadow-xl transition-all duration-300"
+                className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 sm:p-8 flex flex-col items-center text-center border border-white/20 hover:shadow-xl transition-all duration-300"
               >
-                <div className={`p-4 rounded-full bg-${item.color}-100/20 mb-6`}>{item.icon}</div>
-                <p className={`text-sm font-semibold uppercase tracking-wider text-${item.color}-300 mb-2`}>
+                <div className={`p-3 sm:p-4 rounded-full bg-${item.color}-100/20 mb-4 sm:mb-6`}>{item.icon}</div>
+                <p className={`text-xs sm:text-sm font-semibold uppercase tracking-wider text-${item.color}-300 mb-2`}>
                   {item.flavor}
                 </p>
                 <h3
-                  className="text-2xl font-semibold mb-4 drop-shadow-sm"
+                  className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 drop-shadow-sm"
                   style={{ fontFamily: "var(--font-agrandir-wide), Poppins, sans-serif" }}
                 >
                   {item.title}
                 </h3>
-                <p className="leading-relaxed text-white/80 font-thin" style={{ fontFamily: "var(--font-agrandir-wide), Poppins, sans-serif" }}>
+                <p className="text-sm sm:text-base leading-relaxed text-white/80 font-thin" style={{ fontFamily: "var(--font-agrandir-wide), Poppins, sans-serif" }}>
                   {item.description}
                 </p>
               </div>
