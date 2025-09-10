@@ -34,6 +34,12 @@ export default function Home() {
       const isMobile = window.innerWidth <= 768
       
       gsap.utils.toArray(".fade-in-section").forEach((section: any, index) => {
+        // Skip Coffee & Wellness section from global fade-in animations
+        if (section.dataset?.section === "coffee-health" || 
+            section.dataset?.section === "affo-healthcare-page3") {
+          gsap.set(section, { opacity: 1, y: 0, clearProps: "all" })
+          return
+        }
         if (!isMobile) {
           // Desktop: Apply slide-up animations
           gsap.fromTo(

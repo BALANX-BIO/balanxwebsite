@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useResponsiveScreen } from "@/hooks/useResponsiveScreen"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
@@ -11,8 +12,31 @@ if (typeof window !== "undefined") {
 export default function AboutAffoHealthcareSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const [mobileOffset, setMobileOffset] = useState(0)
 
   useEffect(() => {
+    // Mobile detection and offset calculation
+    const calculateMobileOffset = () => {
+      const screenWidth = window.innerWidth
+      const screenHeight = window.innerHeight
+      
+      const isMobileDevice = screenWidth <= 768
+      setIsMobile(isMobileDevice)
+      
+      if (!isMobileDevice) {
+        setMobileOffset(0)
+        return
+      }
+      
+      // FORCE -20% for all mobile devices for testing
+      setMobileOffset(-20)
+      
+    }
+    
+    calculateMobileOffset()
+    window.addEventListener('resize', calculateMobileOffset)
+
     const ctx = gsap.context(() => {
       if (sectionRef.current && contentRef.current) {
         // Fade in animation for the section
@@ -53,7 +77,10 @@ export default function AboutAffoHealthcareSection() {
       }
     })
 
-    return () => ctx.revert()
+    return () => {
+      ctx.revert()
+      window.removeEventListener('resize', calculateMobileOffset)
+    }
   }, [])
 
   return (
@@ -63,9 +90,12 @@ export default function AboutAffoHealthcareSection() {
       className="fade-in-section relative w-full overflow-hidden affo-section affo-section-mobile"
       style={{
         minHeight: "64vh",
-        marginTop: "3rem",
+        marginTop: mobileOffset !== 0 ? `calc(3rem + ${mobileOffset * 5}px)` : "3rem",
         paddingTop: "2rem",
-        paddingBottom: "32vh"
+        paddingBottom: "32vh",
+        position: 'relative',
+        zIndex: 10,
+        transition: 'margin-top 0.3s ease'
       }}
     >
       {/* Video Background */}
@@ -90,17 +120,6 @@ export default function AboutAffoHealthcareSection() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Mobile-specific video adjustment */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          video {
-            object-position: center top;
-            transform: scale(1.2, 1.4);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-          }
-        }
-      `}</style>
 
       {/* Overlay with semi-transparent beige gradient */}
       <div 
@@ -184,22 +203,7 @@ export default function AboutAffoHealthcareSection() {
         </div>
       </div>
 
-      {/* Mobile-specific styling to cut section height */}
-      <style jsx>{`
-        section#about-affo-healthcare {
-          min-height: 64vh !important;
-          padding-bottom: 32vh !important;
-          height: auto !important;
-        }
-        
-        @media (max-width: 768px) {
-          section#about-affo-healthcare {
-            min-height: 50vh !important;
-            padding-bottom: 20vh !important;
-            height: auto !important;
-          }
-        }
-      `}</style>
+      {/* All styling now controlled by React state */}
     </section>
   )
 }

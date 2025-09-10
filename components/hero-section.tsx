@@ -10,8 +10,14 @@ export default function HeroSection() {
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hasScrolled, setHasScrolled] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    // Mobile detection
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
     const ctx = gsap.context(() => {
       // Hero entrance animation with golden ratio timing
       const tl = gsap.timeline({ delay: 1.618 })
@@ -82,6 +88,7 @@ export default function HeroSection() {
       ctx.revert()
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('wheel', preventScroll)
+      window.removeEventListener('resize', checkMobile)
     }
   }, [hasScrolled])
 
@@ -104,7 +111,20 @@ export default function HeroSection() {
         loop 
         playsInline 
         className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ maxWidth: '100%', height: 'auto' }}
+        style={isMobile ? {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          minHeight: '100vh',
+          objectFit: 'cover',
+          objectPosition: 'center center',
+          zIndex: 0
+        } : { 
+          maxWidth: '100%', 
+          height: 'auto' 
+        }}
       >
         <source src="/video/0_Pink_Lake_Salt_Lake_3840x2160_8sec.mp4" type="video/mp4" />
       </video>

@@ -190,7 +190,7 @@ function DesktopInteractiveWorkflow() {
         </div>
       </div>
       {/* Spacer to allow scrolling past the pinned content */}
-      <div style={{ height: `${workflowSteps.length * 150}vh` }} className="w-full"></div>
+      <div style={{ height: `${workflowSteps.length * 20}vh` }} className="w-full"></div>
     </section>
   )
 }
@@ -299,7 +299,7 @@ function MobileInteractiveWorkflow() {
           </div>
         </div>
       </div>
-      <div style={{ height: `${workflowSteps.length * 35}vh` }} className="w-full spacer-mobile"></div>
+      <div style={{ height: `${workflowSteps.length * 5}vh` }} className="w-full spacer-mobile"></div>
     </section>
   )
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
+import { useResponsiveScreen } from "@/hooks/useResponsiveScreen"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
@@ -13,6 +14,7 @@ export default function PersonalizedLifestyleSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const { responsiveValues, isMobile } = useResponsiveScreen()
 
   useEffect(() => {
     // Completely disable all animations for this component
@@ -36,9 +38,10 @@ export default function PersonalizedLifestyleSection() {
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
         style={{ 
           maxWidth: '100%', 
-          height: 'auto',
+          height: `${100 + responsiveValues.videoLengthen()}%`, // Responsive lengthening
           objectFit: 'cover',
-          objectPosition: 'center center'
+          objectPosition: 'center 60%', // Pulled down to show lower portion
+          transform: `translateY(${responsiveValues.videoPullDown()}%)` // Responsive pull down
         }}
       >
         <source src="/video/6035530_Woman_People_3840x2160_5sec.mp4" type="video/mp4" />
@@ -49,9 +52,10 @@ export default function PersonalizedLifestyleSection() {
       <style jsx>{`
         @media (max-width: 768px) {
           video {
-            object-position: center center;
-            transform: scale(1.3);
+            object-position: center 60%;
+            transform: scale(1.3) translateY(${responsiveValues.videoPullDown()}%);
             filter: brightness(0.7);
+            height: ${100 + responsiveValues.videoLengthen()}%;
           }
         }
       `}</style>

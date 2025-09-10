@@ -346,17 +346,9 @@ img, video, svg {
     margin-top: -35vh !important;
   }
   
-  /* AFFO Healthcare Section - Video scaling and spacing */
-  .affo-section-mobile {
-    margin-top: -25vh !important;
-  }
+  /* REMOVED: AFFO Healthcare Section conflicting margin rule */
   
-  .affo-section-mobile video {
-    object-position: center top;
-    transform: scale(1, 1.4);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
+  /* Removed global video rules - now handled in component */
   
   /* AffoHealthcarePage2Section - Spacing */
   .affo-page2-mobile {
@@ -383,10 +375,7 @@ img, video, svg {
     margin-top: -20vh !important;
   }
   
-  /* AFFO Healthcare Section (microscope) - Move up by 100% */
-  .affo-healthcare-mobile {
-    margin-top: -100vh !important;
-  }
+  /* REMOVED: AFFO Healthcare Section conflicting rule */
   
   /* Timeline faster scrolling for mobile */
   .timeline-section-mobile .spacer-mobile {
@@ -432,9 +421,7 @@ img, video, svg {
     margin-top: 0 !important;
   }
   
-  .affo-section-mobile {
-    margin-top: 3rem !important;
-  }
+  /* Removed conflicting affo-section-mobile margin rule */
   
   .affo-page2-mobile {
     margin-top: 0 !important;
