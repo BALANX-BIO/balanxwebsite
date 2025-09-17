@@ -127,28 +127,28 @@ export default function PreOrdersAdminPage() {
 
             {!loading && !error && preOrders.length > 0 && (
               <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="font-extralight">ID</TableHead>
-                      <TableHead className="font-extralight">Name</TableHead>
-                      <TableHead className="font-extralight">Email</TableHead>
-                      <TableHead className="font-extralight">Created At</TableHead>
+                <Table className="bg-black rounded-lg">
+                  <TableHeader className="bg-gray-900">
+                    <TableRow className="border-gray-700 hover:bg-gray-800">
+                      <TableHead className="font-extralight text-white border-gray-700">ID</TableHead>
+                      <TableHead className="font-extralight text-white border-gray-700">Name</TableHead>
+                      <TableHead className="font-extralight text-white border-gray-700">Email</TableHead>
+                      <TableHead className="font-extralight text-white border-gray-700">Created At</TableHead>
                     </TableRow>
                   </TableHeader>
-                  <TableBody>
+                  <TableBody className="bg-black">
                     {preOrders.map((order) => (
-                      <TableRow key={order.id}>
-                        <TableCell className="font-mono text-xs text-stone-500">
+                      <TableRow key={order.id} className="border-gray-700 hover:bg-gray-800">
+                        <TableCell className="font-mono text-xs text-gray-300 border-gray-700">
                           {order.id}
                         </TableCell>
-                        <TableCell className="font-extralight">
+                        <TableCell className="font-extralight text-white border-gray-700">
                           {order.first_name} {order.last_name}
                         </TableCell>
-                        <TableCell className="font-extralight">
+                        <TableCell className="font-extralight text-white border-gray-700">
                           {order.email}
                         </TableCell>
-                        <TableCell className="font-extralight text-stone-600">
+                        <TableCell className="font-extralight text-gray-300 border-gray-700">
                           {formatDate(order.created_at)}
                         </TableCell>
                       </TableRow>

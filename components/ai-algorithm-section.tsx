@@ -1062,7 +1062,7 @@ function CoffeeConfiguration() {
             <div className="text-center">
               <h3 className="text-3xl font-semibold text-amber-900 mb-8 inline-block px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-50/40 via-white/30 to-amber-50/40 backdrop-blur-xl shadow-2xl border border-amber-200/50 hover:shadow-3xl hover:border-amber-300/70 transition-all duration-500" style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}>Base Drink Configuration</h3>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 gap-6">
               {[
                 {
                   title: "Caffeine",

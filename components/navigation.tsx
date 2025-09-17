@@ -170,57 +170,68 @@ export default function Navigation() {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center md:hidden">
-          <div className="flex flex-col items-center space-y-6 w-full px-8">
+       {/* Mobile Menu Overlay */}
+       {mobileMenuOpen && (
+         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center md:hidden" style={{ backgroundColor: '#000000', opacity: 1, backdropFilter: 'none' }}>
+           {/* Close Button */}
+           <button
+             onClick={() => setMobileMenuOpen(false)}
+             className="absolute top-4 right-8 text-white hover:text-green-400 transition-colors duration-300 z-10"
+           >
+             <div className="w-8 h-8 flex items-center justify-center">
+               <div className="w-6 h-px bg-current transform rotate-45"></div>
+               <div className="w-6 h-px bg-current transform -rotate-45 absolute"></div>
+             </div>
+           </button>
+           
+           <div className="flex flex-col items-center space-y-8 w-full px-8" style={{ backgroundColor: '#000000' }}>
             <button
               onClick={() => handleMobileNavigation('hero')}
-              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              className="text-white text-2xl font-extralight hover:text-green-400 transition-colors duration-200 w-full py-4 border-b border-white/30 hover:bg-white/10 rounded-lg px-4"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: '#ffffff' }}
             >
               Home
             </button>
             <button
               onClick={() => handleMobileNavigation('interactive-workflow')}
-              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              className="text-white text-2xl font-extralight hover:text-green-400 transition-colors duration-200 w-full py-4 border-b border-white/30 hover:bg-white/10 rounded-lg px-4"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: '#ffffff' }}
             >
               About
             </button>
             <button
               onClick={() => handleMobileNavigation('algorithm')}
-              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              className="text-white text-2xl font-extralight hover:text-green-400 transition-colors duration-200 w-full py-4 border-b border-white/30 hover:bg-white/10 rounded-lg px-4"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: '#ffffff' }}
             >
               Our Algorithm
             </button>
             <button
               onClick={() => handleMobileNavigation('affo-healthcare-page2')}
-              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              className="text-white text-2xl font-extralight hover:text-green-400 transition-colors duration-200 w-full py-4 border-b border-white/30 hover:bg-white/10 rounded-lg px-4"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: '#ffffff' }}
             >
               Affo Healthcare
             </button>
             <button
               onClick={() => handleMobileNavigation('affo-healthcare-page3')}
-              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              className="text-white text-2xl font-extralight hover:text-green-400 transition-colors duration-200 w-full py-4 border-b border-white/30 hover:bg-white/10 rounded-lg px-4"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: '#ffffff' }}
             >
               Services
             </button>
             <button
               onClick={() => handleMobileNavigation('contact')}
-              className="text-white text-xl font-extralight hover:text-light-green-400 transition-colors duration-200 w-full py-3 border-b border-white/20"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              className="text-white text-2xl font-extralight hover:text-green-400 transition-colors duration-200 w-full py-4 border-b border-white/30 hover:bg-white/10 rounded-lg px-4"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: '#ffffff' }}
             >
               Contact
             </button>
             
             <Link
               href="/pre-order"
-              className="mt-8 inline-flex items-center px-6 py-3 bg-black/80 text-white font-extralight rounded-full hover:bg-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 backdrop-blur-sm"
-              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif" }}
+              className="mt-4 text-white text-2xl font-extralight hover:text-green-400 transition-colors duration-200 w-full py-4 border-b border-white/30 hover:bg-white/10 rounded-lg px-4 text-center"
+              style={{ fontFamily: "var(--font-agrandir-wide), Quicksand, sans-serif", color: '#ffffff' }}
               onClick={() => setMobileMenuOpen(false)}
             >
               Join the Waitlist
